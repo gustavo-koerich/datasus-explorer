@@ -214,7 +214,20 @@
 (async function () {
   "use strict";
 
-  const RAW = await fetch("dashboard_data.json").then((r) => r.json());
+  let RAW;
+  try {
+    const res = await fetch("dashboard_data.json");
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    RAW = await res.json();
+  } catch (err) {
+    document.getElementById("loading").innerHTML =
+      "Não foi possível carregar os dados (" + err.message + ").<br>" +
+      "Se você abriu este arquivo direto do computador (duplo clique), isso não funciona — " +
+      "navegadores bloqueiam essa leitura por segurança (CORS em file://).<br>" +
+      "Use <a href=\"https://gustavo-koerich.github.io/datasus-explorer/\">o link publicado</a>, " +
+      "ou sirva a pasta localmente com <code>python -m http.server</code>.";
+    return;
+  }
   document.getElementById("loading").hidden = true;
   document.getElementById("app").hidden = false;
 
