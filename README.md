@@ -1,6 +1,6 @@
 # Explorador de Procedimentos do SUS
 
-Ferramenta de busca e análise de procedimentos hospitalares do SUS: digite o nome de qualquer procedimento (parto, joelho, apêndice, catarata...) e veja onde ele mais acontece no Brasil — por estado, hospital e município.
+Dashboard de análise de procedimentos hospitalares do SUS: filtre por procedimento (parto, joelho, apêndice, catarata...), ano, UF, município, diagnóstico, hospital, material e ato profissional — combináveis entre si — e veja KPIs, distribuição geográfica, diagnósticos associados e evolução temporal.
 
 **[Ver dashboard ao vivo](https://gustavo-koerich.github.io/datasus-explorer/)**
 
@@ -13,7 +13,7 @@ Um pipeline em Python baixa e cruza quatro bases públicas do governo brasileiro
 - **CID-10** — códigos de diagnóstico
 - **CNES** — cadastro nacional de estabelecimentos de saúde
 
-O resultado é uma base tratada, com nomes legíveis (hospital, município, procedimento, diagnóstico) no lugar dos códigos brutos, servida por um dashboard estático que permite buscar qualquer procedimento cadastrado e ver o panorama geográfico dele.
+O resultado é uma base tratada, com nomes legíveis (hospital, município, procedimento, diagnóstico) no lugar dos códigos brutos, servida por um dashboard estático com filtros combináveis em cascata (cada campo só mostra opções compatíveis com os demais filtros já aplicados), KPIs, gráficos e tabela — clicar numa barra de gráfico também filtra.
 
 Atualmente cobre 25 procedimentos de 7 especialidades (obstetrícia, cirurgia geral, ortopedia, oftalmologia, otorrinolaringologia, ginecologia, cirurgia bariátrica), amostra de março/2026, todas as 27 UFs. A lista de procedimentos e o período são configuráveis — ver `extrator_sigtap_sus.py`.
 
@@ -26,7 +26,7 @@ Atualmente cobre 25 procedimentos de 7 especialidades (obstetrícia, cirurgia ge
 4. Salva checkpoints por UF em `extracao_bruta/` — resumível, seguro interromper a qualquer momento
 5. Consolida tudo em `base_procedimentos_sus.csv` e `base_profissionais_sus.csv`
 
-`prepara_dashboard.py` agrega essa base (por procedimento × UF/hospital/município) num JSON compacto consumido pelo dashboard estático em `dashboard/`.
+`prepara_dashboard.py` converte essa base num JSON compacto consumido pelo dashboard estático em `docs/`: em vez de repetir texto, cada registro referencia índices em dicionários compartilhados (diagnóstico, município, hospital, procedimento, material, ato profissional) — permite filtros combináveis inteiramente no cliente, sem backend. Números de profissional (CPF) nunca são expostos: viram um id sequencial anônimo, usado só para contar profissionais distintos por filtro.
 
 ## Rodando localmente
 

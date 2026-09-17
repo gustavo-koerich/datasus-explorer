@@ -51,72 +51,93 @@
   }
   * { box-sizing: border-box; }
   body {
-    margin: 0;
-    background: var(--page-plane);
-    color: var(--text-primary);
+    margin: 0; background: var(--page-plane); color: var(--text-primary);
     font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
   }
-  .wrap { max-width: 1100px; margin: 0 auto; padding: 24px 20px 60px; }
-  .header { margin-bottom: 20px; }
-  .header h1 { font-size: 22px; font-weight: 700; margin: 0 0 6px; }
-  .header p { font-size: 13.5px; color: var(--text-secondary); margin: 0; line-height: 1.5; }
-  .header a { color: var(--series-1); }
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 20px 20px 60px; }
+  .header { margin-bottom: 16px; }
+  .header h1 { font-size: 20px; font-weight: 700; margin: 0 0 4px; }
+  .header p { font-size: 13px; color: var(--text-secondary); margin: 0; }
 
-  .kpis-global { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 18px 0; }
-  .kpi-tile { background: var(--surface-1); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; }
-  .kpi-tile .value { font-size: 22px; font-weight: 600; }
-  .kpi-tile .label { font-size: 11.5px; color: var(--text-secondary); margin-top: 2px; }
-
-  .search-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
-  #busca {
-    flex: 1 1 260px; font: inherit; font-size: 14px; color: var(--text-primary);
-    background: var(--surface-1); border: 1px solid var(--baseline); border-radius: 10px;
-    padding: 10px 14px;
+  .banner {
+    background: var(--series-1-wash); border: 1px solid var(--border); border-radius: 10px;
+    padding: 10px 14px; font-size: 12.5px; color: var(--text-secondary); margin-bottom: 16px;
   }
-  #busca::placeholder { color: var(--text-muted); }
+  .banner strong { color: var(--text-primary); }
 
-  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
+  .loading { font-size: 13px; color: var(--text-muted); padding: 40px 0; text-align: center; }
+
+  .card { background: var(--surface-1); border: 1px solid var(--border); border-radius: 12px; }
+
+  .filters { display: flex; flex-wrap: wrap; gap: 10px; padding: 12px; margin-bottom: 16px; }
+  .filter-field { display: flex; flex-direction: column; gap: 4px; min-width: 150px; flex: 1 1 160px; }
+  .filter-field label { font-size: 11px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: .02em; }
+  .filter-field input[type="text"] {
+    font-family: inherit; font-size: 13px; color: var(--text-primary); background: var(--surface-1);
+    border: 1px solid var(--baseline); border-radius: 8px; padding: 7px 8px; width: 100%;
+  }
+  .filter-field input[type="text"]::placeholder { color: var(--text-muted); }
+  .chips { display: flex; flex-wrap: wrap; gap: 4px; }
+  .chips:empty { display: none; }
   .chip {
-    font-size: 12.5px; padding: 5px 12px; border-radius: 999px; border: 1px solid var(--baseline);
-    background: var(--surface-1); color: var(--text-secondary); cursor: pointer;
+    display: inline-flex; align-items: center; gap: 4px; background: var(--series-1-wash);
+    color: var(--text-primary); border-radius: 999px; padding: 3px 4px 3px 9px; font-size: 12px; line-height: 1.3;
   }
-  .chip.active { background: var(--series-1-wash); color: var(--text-primary); border-color: var(--series-1); font-weight: 600; }
-
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; margin-bottom: 24px; }
-  .card {
-    background: var(--surface-1); border: 1px solid var(--border); border-radius: 12px;
-    padding: 14px; cursor: pointer; text-align: left; font: inherit; color: inherit;
+  .chip-remove { background: none; border: none; cursor: pointer; color: var(--text-secondary); font-size: 14px; line-height: 1; padding: 2px 5px; border-radius: 50%; }
+  .chip-remove:hover { background: rgba(127,127,127,0.25); color: var(--text-primary); }
+  .filter-reset {
+    align-self: flex-end; font-size: 12.5px; color: var(--series-1); background: none;
+    border: 1px solid var(--baseline); border-radius: 8px; padding: 7px 12px; cursor: pointer; height: 32px;
   }
-  .card:hover { border-color: var(--series-1); }
-  .card.active { outline: 2px solid var(--series-1); outline-offset: -1px; }
-  .card .cat { font-size: 10.5px; text-transform: uppercase; letter-spacing: .03em; color: var(--text-muted); font-weight: 600; }
-  .card .nome { font-size: 13.5px; font-weight: 600; margin: 4px 0 8px; line-height: 1.3; min-height: 34px; }
-  .card .qtd { font-size: 18px; font-weight: 700; }
-  .card .qtd-label { font-size: 11px; color: var(--text-secondary); }
+  .filter-reset:hover { background: var(--series-1-wash); }
 
-  .empty-note { font-size: 13px; color: var(--text-muted); padding: 20px 0; }
+  .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 16px; }
+  .stat-tile { padding: 16px; }
+  .stat-tile .value { font-size: 30px; font-weight: 600; line-height: 1.1; }
+  .stat-tile .label { font-size: 12.5px; color: var(--text-secondary); margin-top: 4px; }
 
-  .detail { display: none; }
-  .detail.show { display: block; }
-  .detail-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 14px; }
-  .detail-header h2 { font-size: 18px; margin: 0 0 4px; }
-  .detail-header .cat { font-size: 12px; color: var(--text-secondary); }
-  .fechar { background: none; border: 1px solid var(--baseline); border-radius: 8px; color: var(--text-secondary); padding: 6px 12px; cursor: pointer; font-size: 12.5px; }
-  .fechar:hover { background: var(--series-1-wash); }
+  .charts { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; margin-bottom: 16px; }
+  .chart-card { padding: 16px; }
+  .chart-card h2 { font-size: 13.5px; font-weight: 600; margin: 0 0 12px; }
 
-  .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; margin-bottom: 16px; }
-
-  .charts { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px; }
-  .chart-card { background: var(--surface-1); border: 1px solid var(--border); border-radius: 12px; padding: 14px; }
-  .chart-card h3 { font-size: 12.5px; font-weight: 600; margin: 0 0 10px; color: var(--text-secondary); }
-  .bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 7px; }
+  .bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; position: relative; width: 100%; }
   .bar-row:last-child { margin-bottom: 0; }
-  .bar-label { font-size: 11.5px; color: var(--text-secondary); width: 130px; flex: 0 0 130px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-align: right; }
-  .bar-track { flex: 1; height: 14px; background: var(--track); border-radius: 4px; }
-  .bar-fill { height: 100%; background: var(--series-1); border-radius: 4px; min-width: 3px; }
-  .bar-value { font-size: 11.5px; width: 44px; flex: 0 0 44px; font-variant-numeric: tabular-nums; }
+  button.bar-row { background: none; border: none; padding: 0; margin: 0 0 8px; font: inherit; color: inherit; text-align: inherit; cursor: pointer; }
+  button.bar-row:last-child { margin-bottom: 0; }
+  .bar-row:hover .bar-fill, button.bar-row:hover .bar-fill { filter: brightness(1.12); }
+  .bar-row.active { outline: 2px solid var(--series-1); outline-offset: 3px; border-radius: 4px; }
+  .bar-row.active .bar-label { color: var(--text-primary); font-weight: 700; }
+  .bar-label { font-size: 12px; color: var(--text-secondary); width: 150px; flex: 0 0 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-align: right; }
+  .bar-track { flex: 1; height: 16px; background: var(--track); border-radius: 4px; position: relative; overflow: visible; }
+  .bar-fill { height: 100%; background: var(--series-1); border-radius: 4px; min-width: 3px; transition: filter .1s; }
+  .bar-value { font-size: 12px; color: var(--text-primary); width: 46px; flex: 0 0 46px; font-variant-numeric: tabular-nums; }
 
-  footer { margin-top: 30px; font-size: 12px; color: var(--text-muted); border-top: 1px solid var(--gridline); padding-top: 14px; }
+  .vbars { display: flex; align-items: flex-end; gap: 6px; height: 200px; padding-top: 24px; }
+  .vbar-col { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; min-width: 0; }
+  button.vbar-col { background: none; border: none; padding: 0; margin: 0; font: inherit; color: inherit; cursor: pointer; }
+  .vbar-col:hover .vbar-fill, button.vbar-col:hover .vbar-fill { filter: brightness(1.12); }
+  .vbar-col.active { outline: 2px solid var(--series-1); outline-offset: 3px; border-radius: 4px; }
+  .vbar-col.active .vbar-label { color: var(--text-primary); font-weight: 700; }
+  .vbar-value { font-size: 11px; color: var(--text-secondary); margin-bottom: 4px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .vbar-fill { width: 100%; max-width: 26px; background: var(--series-1); border-radius: 4px 4px 0 0; min-height: 3px; }
+  .vbar-label { font-size: 10.5px; color: var(--text-muted); margin-top: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+
+  .empty-note { font-size: 12.5px; color: var(--text-muted); padding: 8px 0; }
+
+  .table-card { padding: 16px; }
+  .table-card h2 { font-size: 13.5px; font-weight: 600; margin: 0 0 4px; }
+  .table-note { font-size: 12px; color: var(--text-muted); margin: 0 0 10px; }
+  .table-scroll { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 12.5px; min-width: 820px; }
+  thead th { text-align: left; font-weight: 600; color: var(--text-muted); font-size: 11px; text-transform: uppercase; letter-spacing: .02em; border-bottom: 1px solid var(--gridline); padding: 8px 10px; white-space: nowrap; }
+  tbody td { padding: 7px 10px; border-bottom: 1px solid var(--gridline); color: var(--text-secondary); white-space: nowrap; }
+  tbody td.strong { color: var(--text-primary); }
+  tbody td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  tbody tr:hover td { background: var(--series-1-wash); }
+  tfoot td { padding: 10px; font-weight: 700; color: var(--text-primary); border-top: 1px solid var(--baseline); }
+  tfoot td.num { text-align: right; font-variant-numeric: tabular-nums; }
+
+  footer { margin-top: 24px; font-size: 12px; color: var(--text-muted); }
   footer a { color: var(--text-secondary); }
 </style>
 </head>
@@ -124,157 +145,419 @@
 <div class="wrap">
   <div class="header">
     <h1>Explorador de Procedimentos do SUS</h1>
-    <p>
-      Busque qualquer procedimento (parto, joelho, apêndice, catarata...) e veja onde ele mais acontece no Brasil.
-      Dados públicos do SIH/SUS (DATASUS) cruzados com SIGTAP, CID-10 e CNES.
-    </p>
+    <p>SIH/SUS (DATASUS) + SIGTAP + CNES + CID-10 · dados públicos. Busque qualquer procedimento (parto, joelho, apêndice, catarata...) e filtre por estado, hospital, diagnóstico e mais.</p>
   </div>
 
-  <div class="kpis-global" id="kpisGlobais"></div>
-
-  <div class="search-row">
-    <input type="text" id="busca" placeholder="Buscar procedimento... ex: joelho, parto, apêndice" autocomplete="off" />
+  <div class="banner">
+    <strong>Amostra de 1 mês (competência 2026-03), todas as UFs.</strong>
+    Cobre 25 procedimentos de 7 especialidades — período e lista de procedimentos são configuráveis no
+    <a href="https://github.com/gustavo-koerich/datasus-explorer" target="_blank" rel="noopener">pipeline de extração</a>.
   </div>
-  <div class="chips" id="categorias"></div>
 
-  <div class="grid" id="grid"></div>
-  <p class="empty-note" id="vazio" hidden>Nenhum procedimento encontrado para essa busca.</p>
+  <p class="loading" id="loading">Carregando dados (~23 MB)...</p>
 
-  <div class="detail" id="detail"></div>
+  <div id="app" hidden>
+    <div class="card filters" id="filters"></div>
+
+    <div class="kpis" id="kpis"></div>
+
+    <div class="charts">
+      <div class="card chart-card">
+        <h2>Top estados</h2>
+        <div id="chartEstados"></div>
+      </div>
+      <div class="card chart-card">
+        <h2>Top hospitais</h2>
+        <div id="chartHospitais"></div>
+      </div>
+      <div class="card chart-card">
+        <h2>Top município (onde o procedimento foi realizado)</h2>
+        <div id="chartMunicipioCirurgia"></div>
+      </div>
+      <div class="card chart-card">
+        <h2>Diagnósticos associados</h2>
+        <div id="chartDiagnostico"></div>
+      </div>
+      <div class="card chart-card">
+        <h2>Evolução por ano</h2>
+        <div id="chartTempo"></div>
+      </div>
+    </div>
+
+    <div class="card table-card">
+      <h2>Procedimentos</h2>
+      <p class="table-note" id="tableNote"></p>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Ano</th><th>Mês</th><th>Dia</th><th>Procedimento</th><th>Diagnóstico</th><th>UF</th>
+              <th>Município</th><th>Hospital</th><th>Material</th><th class="num">Valor total</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+          <tfoot>
+            <tr><td colspan="9">Total (registros filtrados)</td><td class="num" id="tableTotal"></td></tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
 
   <footer>
-    Fonte: SIH/SUS (DATASUS) + Tabela SIGTAP + CNES — dados públicos.
-    Amostra de <span id="rodapeCompetencia"></span>, todas as UFs.
-    Código do pipeline de extração no
+    Código do pipeline de extração e deste dashboard no
     <a href="https://github.com/gustavo-koerich/datasus-explorer" target="_blank" rel="noopener">repositório</a>.
   </footer>
 </div>
 
 <script>
-const fmt = new Intl.NumberFormat('pt-BR');
-const fmtMoeda = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 });
+(async function () {
+  "use strict";
 
-let DADOS = null;
-let categoriaAtiva = null;
+  const RAW = await fetch("dashboard_data.json").then((r) => r.json());
+  document.getElementById("loading").hidden = true;
+  document.getElementById("app").hidden = false;
 
-async function init() {
-  const res = await fetch('dashboard_data.json');
-  DADOS = await res.json();
+  const DIC = RAW.dic;
+  const PROCEDIMENTOS = RAW.procedimentos.map(function (r) {
+    const cid = DIC.cid[r[1]];
+    const trat = DIC.trat[r[5]];
+    return {
+      uf: r[0],
+      cid: cid[0],
+      cidNome: cid[1],
+      munNome: DIC.mun[r[2]],
+      munCirurgiaNome: DIC.munCirurgia[r[3]],
+      hospNome: DIC.hosp[r[4]],
+      tratCod: trat[0],
+      tratNome: trat[1],
+      material: DIC.material[r[6]],
+      valorTotal: r[7],
+      ano: r[8],
+      mes: r[9],
+      dia: r[10],
+      atos: r[11].map(function (i) { return DIC.ato[i]; }),
+      profissionais: r[12],
+    };
+  });
 
-  document.getElementById('rodapeCompetencia').textContent = DADOS.competencia;
+  const MESES_NOME = ["", "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+    "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
 
-  document.getElementById('kpisGlobais').innerHTML = [
-    kpiTile(fmt.format(DADOS.totalRegistros), 'Procedimentos no período'),
-    kpiTile(DADOS.totalProcedimentos, 'Tipos de procedimento'),
-    kpiTile(fmt.format(DADOS.totalHospitais), 'Hospitais envolvidos'),
-    kpiTile(fmt.format(DADOS.totalMunicipios), 'Municípios'),
-  ].join('');
+  const fmtBRL = (v) => v.toLocaleString("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 });
+  const fmtNum = (v) => v.toLocaleString("pt-BR");
+  const fmtCompactBRL = (v) => {
+    if (v >= 1e6) return "R$ " + (v / 1e6).toLocaleString("pt-BR", { maximumFractionDigits: 1 }) + " Mi";
+    if (v >= 1e3) return "R$ " + (v / 1e3).toLocaleString("pt-BR", { maximumFractionDigits: 1 }) + " Mil";
+    return fmtBRL(v);
+  };
 
-  const categorias = [...new Set(DADOS.procedimentos.map(p => p.categoria))];
-  document.getElementById('categorias').innerHTML = categorias.map(
-    c => `<button class="chip" data-cat="${escapeHtml(c)}">${escapeHtml(c)}</button>`
-  ).join('');
-  document.querySelectorAll('.chip').forEach(el => el.addEventListener('click', () => {
-    categoriaAtiva = categoriaAtiva === el.dataset.cat ? null : el.dataset.cat;
-    document.querySelectorAll('.chip').forEach(c => c.classList.toggle('active', c.dataset.cat === categoriaAtiva));
+  // ---------- filtros ----------
+  // Cada campo sabe extrair seu valor/rótulo de um procedimento. Cada campo
+  // aceita MÚLTIPLOS valores selecionados ao mesmo tempo (OR entre eles);
+  // entre campos diferentes o filtro é AND. "Procedimento" é o campo usado
+  // pra buscar um procedimento específico (ex: digitar "joelho").
+  const filtroDefs = [
+    { key: "ano", label: "Ano", valor: (c) => String(c.ano), rotulo: (c) => String(c.ano), sortNumeric: true },
+    { key: "mes", label: "Mês", valor: (c) => String(c.mes), rotulo: (c) => MESES_NOME[c.mes], sortNumeric: true },
+    { key: "uf", label: "UF", valor: (c) => c.uf, rotulo: (c) => c.uf },
+    { key: "munNome", label: "Município (residência)", valor: (c) => c.munNome, rotulo: (c) => c.munNome },
+    { key: "munCirurgiaNome", label: "Município (procedimento)", valor: (c) => c.munCirurgiaNome, rotulo: (c) => c.munCirurgiaNome },
+    { key: "cidNome", label: "Diagnóstico", valor: (c) => c.cidNome, rotulo: (c) => c.cidNome },
+    { key: "tratNome", label: "Procedimento", valor: (c) => c.tratNome, rotulo: (c) => c.tratNome },
+    { key: "atos", label: "Ato profissional", multi: true, valores: (c) => c.atos },
+    { key: "material", label: "Material", valor: (c) => c.material, rotulo: (c) => c.material },
+    { key: "hospNome", label: "Hospital", valor: (c) => c.hospNome, rotulo: (c) => c.hospNome },
+  ];
+
+  const estado = {};
+  filtroDefs.forEach((f) => { estado[f.key] = []; }); // [] = Todos
+
+  function passaFiltroExceto(c, chaveExcluida) {
+    for (const f of filtroDefs) {
+      if (f.key === chaveExcluida) continue;
+      const selecionados = estado[f.key];
+      if (selecionados.length === 0) continue;
+      if (f.multi) {
+        if (!f.valores(c).some((v) => selecionados.includes(v))) return false;
+      } else if (!selecionados.includes(f.valor(c))) {
+        return false;
+      }
+    }
+    return true;
+  }
+  const passaFiltro = (c) => passaFiltroExceto(c, null);
+
+  function opcoesPara(f) {
+    const subset = PROCEDIMENTOS.filter((c) => passaFiltroExceto(c, f.key));
+    const pares = new Map();
+    subset.forEach((c) => {
+      if (f.multi) {
+        f.valores(c).forEach((v) => pares.set(v, v));
+      } else {
+        pares.set(f.valor(c), f.rotulo(c));
+      }
+    });
+    const lista = [...pares.entries()];
+    lista.sort(f.sortNumeric ? (a, b) => Number(a[0]) - Number(b[0]) : (a, b) => a[1].localeCompare(b[1], "pt-BR"));
+    return lista;
+  }
+
+  function toggleFiltroValor(chave, valor) {
+    const atual = estado[chave];
+    estado[chave] = (atual.length === 1 && atual[0] === valor) ? [] : [valor];
     render();
-  }));
+  }
 
-  document.getElementById('busca').addEventListener('input', render);
+  const filtrosEl = document.getElementById("filters");
+  const inputsPorChave = {};
+  filtroDefs.forEach((f) => {
+    const wrap = document.createElement("div");
+    wrap.className = "filter-field";
+    const label = document.createElement("label");
+    label.textContent = f.label;
+    const chipsEl = document.createElement("div");
+    chipsEl.className = "chips";
+    const input = document.createElement("input");
+    input.type = "text";
+    input.placeholder = "Buscar...";
+    input.autocomplete = "off";
+    input.spellcheck = false;
+    const listId = "dl-" + f.key;
+    input.setAttribute("list", listId);
+    const datalist = document.createElement("datalist");
+    datalist.id = listId;
+    input.addEventListener("input", () => aplicarFiltro(f, input.value));
+    wrap.appendChild(label);
+    wrap.appendChild(chipsEl);
+    wrap.appendChild(input);
+    wrap.appendChild(datalist);
+    filtrosEl.appendChild(wrap);
+    inputsPorChave[f.key] = { input, datalist, chipsEl };
+  });
+
+  function aplicarFiltro(f, texto) {
+    if (texto === "") return;
+    const jaSelecionado = new Set(estado[f.key]);
+    const encontrado = opcoesPara(f).find(([valor, rotulo]) => rotulo === texto && !jaSelecionado.has(valor));
+    if (encontrado) {
+      estado[f.key] = [...estado[f.key], encontrado[0]];
+      inputsPorChave[f.key].input.value = "";
+      render();
+    }
+  }
+
+  function renderChips(f, chipsEl, opcoes) {
+    chipsEl.innerHTML = "";
+    estado[f.key].forEach((valor) => {
+      const par = opcoes.find(([v]) => v === valor);
+      const rotulo = par ? par[1] : valor;
+      const chip = document.createElement("span");
+      chip.className = "chip";
+      const txt = document.createElement("span");
+      txt.textContent = rotulo;
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "chip-remove";
+      btn.textContent = "×";
+      btn.setAttribute("aria-label", "Remover " + rotulo);
+      btn.addEventListener("click", () => {
+        estado[f.key] = estado[f.key].filter((v) => v !== valor);
+        render();
+      });
+      chip.appendChild(txt);
+      chip.appendChild(btn);
+      chipsEl.appendChild(chip);
+    });
+  }
+
+  function atualizarFiltros() {
+    filtroDefs.forEach((f) => {
+      const { datalist, chipsEl } = inputsPorChave[f.key];
+      const opcoes = opcoesPara(f);
+      const opcoesValidas = new Set(opcoes.map(([v]) => v));
+
+      estado[f.key] = estado[f.key].filter((v) => opcoesValidas.has(v));
+
+      const selecionados = new Set(estado[f.key]);
+      datalist.innerHTML = "";
+      opcoes.filter(([v]) => !selecionados.has(v)).forEach(([, rotulo]) => {
+        const opt = document.createElement("option");
+        opt.value = rotulo;
+        datalist.appendChild(opt);
+      });
+
+      renderChips(f, chipsEl, opcoes);
+    });
+  }
+
+  const btnReset = document.createElement("button");
+  btnReset.className = "filter-reset";
+  btnReset.textContent = "Limpar filtros";
+  btnReset.addEventListener("click", () => {
+    filtroDefs.forEach((f) => { estado[f.key] = []; });
+    Object.values(inputsPorChave).forEach(({ input }) => { input.value = ""; });
+    render();
+  });
+  filtrosEl.appendChild(btnReset);
+
+  // ---------- render ----------
+  function topN(counter, n) {
+    return Object.entries(counter).sort((a, b) => b[1] - a[1]).slice(0, n);
+  }
+
+  function renderBarList(container, pares, valueFmt, chave) {
+    container.innerHTML = "";
+    if (pares.length === 0) {
+      container.innerHTML = '<p class="empty-note">Sem dados para os filtros selecionados.</p>';
+      return;
+    }
+    const max = Math.max(...pares.map((p) => p[1]));
+    const ativos = chave ? new Set(estado[chave]) : new Set();
+    pares.forEach(([label, value]) => {
+      const row = document.createElement(chave ? "button" : "div");
+      row.className = "bar-row";
+      if (chave) {
+        row.type = "button";
+        if (ativos.has(label)) row.classList.add("active");
+        row.title = "Clique para filtrar por " + label;
+        row.addEventListener("click", () => toggleFiltroValor(chave, label));
+      }
+      const lab = document.createElement("div");
+      lab.className = "bar-label";
+      lab.textContent = label;
+      lab.title = label;
+      const track = document.createElement("div");
+      track.className = "bar-track";
+      const fill = document.createElement("div");
+      fill.className = "bar-fill";
+      fill.style.width = Math.max(2, (value / max) * 100) + "%";
+      track.appendChild(fill);
+      const val = document.createElement("div");
+      val.className = "bar-value";
+      val.textContent = valueFmt(value);
+      row.appendChild(lab);
+      row.appendChild(track);
+      row.appendChild(val);
+      container.appendChild(row);
+    });
+  }
+
+  function renderVBars(container, pares, valueFmt, chave) {
+    container.innerHTML = "";
+    if (pares.length === 0) {
+      container.innerHTML = '<p class="empty-note">Sem dados para os filtros selecionados.</p>';
+      return;
+    }
+    const wrap = document.createElement("div");
+    wrap.className = "vbars";
+    const max = Math.max(...pares.map((p) => p[1]));
+    const ativos = chave ? new Set(estado[chave]) : new Set();
+    pares.forEach(([label, value]) => {
+      const col = document.createElement(chave ? "button" : "div");
+      col.className = "vbar-col";
+      if (chave) {
+        col.type = "button";
+        if (ativos.has(label)) col.classList.add("active");
+        col.title = "Clique para filtrar por " + label;
+        col.addEventListener("click", () => toggleFiltroValor(chave, label));
+      }
+      const val = document.createElement("div");
+      val.className = "vbar-value";
+      val.textContent = valueFmt(value);
+      const fill = document.createElement("div");
+      fill.className = "vbar-fill";
+      fill.style.height = Math.max(3, (value / max) * 150) + "px";
+      const lab = document.createElement("div");
+      lab.className = "vbar-label";
+      lab.textContent = label;
+      lab.title = label;
+      col.appendChild(val);
+      col.appendChild(fill);
+      col.appendChild(lab);
+      wrap.appendChild(col);
+    });
+    container.appendChild(wrap);
+  }
+
+  function statTile(label, value) {
+    const div = document.createElement("div");
+    div.className = "card stat-tile";
+    div.innerHTML = '<div class="value"></div><div class="label"></div>';
+    div.querySelector(".value").textContent = value;
+    div.querySelector(".label").textContent = label;
+    return div;
+  }
+
+  function render() {
+    atualizarFiltros();
+    const filtradas = PROCEDIMENTOS.filter(passaFiltro);
+
+    const kpisEl = document.getElementById("kpis");
+    kpisEl.innerHTML = "";
+    const valorTotal = filtradas.reduce((s, c) => s + c.valorTotal, 0);
+    const profissionaisUnicos = new Set();
+    filtradas.forEach((c) => c.profissionais.forEach((p) => profissionaisUnicos.add(p)));
+    kpisEl.appendChild(statTile("Total de procedimentos", fmtNum(filtradas.length)));
+    kpisEl.appendChild(statTile("Valor total", fmtCompactBRL(valorTotal)));
+    kpisEl.appendChild(statTile("Profissionais envolvidos", fmtNum(profissionaisUnicos.size)));
+
+    const porUF = {};
+    filtradas.forEach((c) => { porUF[c.uf] = (porUF[c.uf] || 0) + 1; });
+    renderVBars(document.getElementById("chartEstados"), topN(porUF, 12), fmtNum, "uf");
+
+    const porHospital = {};
+    filtradas.forEach((c) => { porHospital[c.hospNome] = (porHospital[c.hospNome] || 0) + 1; });
+    renderVBars(document.getElementById("chartHospitais"), topN(porHospital, 12), fmtNum, "hospNome");
+
+    const porMunicipioCirurgia = {};
+    filtradas.forEach((c) => { porMunicipioCirurgia[c.munCirurgiaNome] = (porMunicipioCirurgia[c.munCirurgiaNome] || 0) + 1; });
+    renderVBars(document.getElementById("chartMunicipioCirurgia"), topN(porMunicipioCirurgia, 12), fmtNum, "munCirurgiaNome");
+
+    const porDiag = {};
+    filtradas.forEach((c) => { porDiag[c.cidNome] = (porDiag[c.cidNome] || 0) + 1; });
+    renderBarList(document.getElementById("chartDiagnostico"), topN(porDiag, 6), fmtNum, "cidNome");
+
+    const porAno = {};
+    filtradas.forEach((c) => { porAno[c.ano] = (porAno[c.ano] || 0) + 1; });
+    const anosOrdenados = Object.entries(porAno).sort((a, b) => a[0].localeCompare(b[0]));
+    renderVBars(document.getElementById("chartTempo"), anosOrdenados, fmtNum, "ano");
+
+    const tbody = document.getElementById("tableBody");
+    tbody.innerHTML = "";
+    const LIMITE = 300;
+    const ordenadas = [...filtradas].sort((a, b) =>
+      (b.ano - a.ano) || (b.mes - a.mes) || (b.dia - a.dia) || (b.valorTotal - a.valorTotal)
+    );
+    ordenadas.slice(0, LIMITE).forEach((c) => {
+      const tr = document.createElement("tr");
+      const cols = [
+        [c.ano, false], [MESES_NOME[c.mes], false], [c.dia, false], [c.tratNome, true],
+        [c.cidNome, false], [c.uf, false], [c.munNome, false], [c.hospNome, true],
+        [c.material, false],
+      ];
+      cols.forEach(([txt, strong]) => {
+        const td = document.createElement("td");
+        if (strong) td.className = "strong";
+        td.textContent = txt;
+        tr.appendChild(td);
+      });
+      const tdValor = document.createElement("td");
+      tdValor.className = "num";
+      tdValor.textContent = fmtBRL(c.valorTotal);
+      tr.appendChild(tdValor);
+      tbody.appendChild(tr);
+    });
+
+    document.getElementById("tableNote").textContent =
+      filtradas.length > LIMITE
+        ? `Mostrando ${LIMITE} de ${fmtNum(filtradas.length)} registros filtrados (ordenado por data).`
+        : `${fmtNum(filtradas.length)} registros filtrados.`;
+    document.getElementById("tableTotal").textContent = fmtBRL(valorTotal);
+  }
 
   render();
-}
-
-function kpiTile(value, label) {
-  return `<div class="kpi-tile"><div class="value">${value}</div><div class="label">${escapeHtml(label)}</div></div>`;
-}
-
-function escapeHtml(str) {
-  return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-}
-
-function normaliza(str) {
-  return str.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
-}
-
-function render() {
-  const termo = normaliza(document.getElementById('busca').value.trim());
-  let lista = DADOS.procedimentos;
-  if (categoriaAtiva) lista = lista.filter(p => p.categoria === categoriaAtiva);
-  if (termo) lista = lista.filter(p => normaliza(p.nome).includes(termo) || normaliza(p.categoria).includes(termo));
-
-  document.getElementById('vazio').hidden = lista.length > 0;
-  document.getElementById('grid').innerHTML = lista.map((p, i) => `
-    <button class="card" data-nome="${escapeHtml(p.nome)}">
-      <div class="cat">${escapeHtml(p.categoria)}</div>
-      <div class="nome">${escapeHtml(titleCase(p.nome))}</div>
-      <div class="qtd">${fmt.format(p.totalRegistros)}</div>
-      <div class="qtd-label">procedimentos no período</div>
-    </button>
-  `).join('');
-
-  document.querySelectorAll('.card').forEach(el => el.addEventListener('click', () => mostraDetalhe(el.dataset.nome)));
-}
-
-function titleCase(str) {
-  return str.toLowerCase().replace(/(^|\s|\/|\()\S/g, c => c.toUpperCase());
-}
-
-function mostraDetalhe(nome) {
-  const p = DADOS.procedimentos.find(x => x.nome === nome);
-  if (!p) return;
-
-  document.querySelectorAll('.card').forEach(c => c.classList.toggle('active', c.dataset.nome === nome));
-
-  const detail = document.getElementById('detail');
-  detail.classList.add('show');
-  detail.innerHTML = `
-    <div class="detail-header">
-      <div>
-        <h2>${escapeHtml(titleCase(p.nome))}</h2>
-        <div class="cat">${escapeHtml(p.categoria)}</div>
-      </div>
-      <button class="fechar" id="fecharDetalhe">Fechar</button>
-    </div>
-    <div class="kpis">
-      ${kpiTile(fmt.format(p.totalRegistros), 'Total no período')}
-      ${kpiTile(fmtMoeda.format(p.valorTotal), 'Valor total SUS')}
-      ${kpiTile(fmtMoeda.format(p.valorMedio), 'Valor médio por procedimento')}
-      ${kpiTile(p.porUF.length, 'UFs com registro')}
-    </div>
-    <div class="charts">
-      ${barChart('Top estados', p.porUF.slice(0, 10), r => r.uf, r => r.qtd)}
-      ${barChart('Top hospitais', p.porHospital.slice(0, 10), r => r.hospital, r => r.qtd)}
-      ${barChart('Top municípios', p.porMunicipio.slice(0, 10), r => r.municipio, r => r.qtd)}
-    </div>
-  `;
-  document.getElementById('fecharDetalhe').addEventListener('click', () => {
-    detail.classList.remove('show');
-    document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
-  });
-  detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-}
-
-function barChart(titulo, linhas, getLabel, getValor) {
-  if (linhas.length === 0) {
-    return `<div class="chart-card"><h3>${escapeHtml(titulo)}</h3><p class="empty-note">Sem dados.</p></div>`;
-  }
-  const max = Math.max(...linhas.map(getValor));
-  const rows = linhas.map(r => {
-    const v = getValor(r);
-    const pct = max > 0 ? (v / max * 100) : 0;
-    return `
-      <div class="bar-row">
-        <div class="bar-label" title="${escapeHtml(getLabel(r))}">${escapeHtml(getLabel(r))}</div>
-        <div class="bar-track"><div class="bar-fill" style="width:${pct}%"></div></div>
-        <div class="bar-value">${fmt.format(v)}</div>
-      </div>
-    `;
-  }).join('');
-  return `<div class="chart-card"><h3>${escapeHtml(titulo)}</h3>${rows}</div>`;
-}
-
-init();
+})();
 </script>
 </body>
 </html>
