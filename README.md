@@ -38,13 +38,13 @@ Baixe o cadastro de estabelecimentos do [Portal de Dados Abertos do CNES](https:
 
 ```bash
 python extrator_sigtap_sus.py    # gera as duas bases CSV (leva tempo: baixa dado real do DATASUS)
-python prepara_dashboard.py      # gera dashboard/dashboard_data.json
+python prepara_dashboard.py      # gera docs/dashboard_data.json
 ```
 
 Para servir o dashboard localmente:
 
 ```bash
-cd dashboard
+cd docs
 python -m http.server 8000
 ```
 

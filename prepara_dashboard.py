@@ -11,7 +11,7 @@ from pathlib import Path
 import pandas as pd
 
 ARQUIVO_ENTRADA = "base_procedimentos_sus.csv"
-ARQUIVO_SAIDA = Path("dashboard") / "dashboard_data.json"
+ARQUIVO_SAIDA = Path("docs") / "dashboard_data.json"
 TOP_N_HOSPITAIS = 15
 TOP_N_MUNICIPIOS = 15
 
