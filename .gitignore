@@ -1,0 +1,8 @@
+extracao_bruta/
+dados_referencia/
+*.csv
+progresso_extracao.txt
+progresso_extracao_historico.csv
+*.log
+__pycache__/
+*.pyc
